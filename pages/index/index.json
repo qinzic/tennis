@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "SearchBar":"../../components/SearchBar/SearchBar"
+  },
+  "navigationBarTitleText": "Java1234Mall-首页（教学案例）"
+}

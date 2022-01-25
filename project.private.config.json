@@ -1,0 +1,42 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "商品分类",
+          "pathName": "pages/category/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "商品详情页面",
+          "pathName": "pages/product_detail/index",
+          "query": "id=14",
+          "scene": null
+        },
+        {
+          "name": "收货地址",
+          "pathName": "pages/cart/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "确认订单",
+          "pathName": "pages/pay/index",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}
