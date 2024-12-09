@@ -2,7 +2,7 @@
 let ajaxTimes=0;
 
 // 定义公共的url
-const baseUrl="http://192.168.0.116/";
+const baseUrl="http://localhost/";
 
 /**
  * 返回baseUrl
@@ -49,6 +49,25 @@ export const getLogin=()=>{
 }
 
 /**
+ * promise形式的 小程序的微信支付
+ * @param {*} pay 
+ */
+export const requestPay=(pay)=>{
+  return new Promise((resolve,reject)=>{
+    wx.requestPayment({
+      ...pay,
+      success:(res)=>{
+        resolve(res);
+      },
+      fail:(err)=>{
+        reject(err);
+      }
+    })
+  })
+}
+
+
+/**
  * 后端请求工具类
  * @param {*} params 请求参数
  */
@@ -62,12 +81,21 @@ export const requestUtil=(params)=>{
 
 
   ajaxTimes++;
-  // 显示加载中 效果
-  wx.showLoading({
-    title: "加载中",
-    mask: true
-  });
-    
+
+
+ 
+     // 显示加载中 效果
+    wx.showLoading({
+      title: "加载中",
+      mask: true
+    });
+
+
+ 
+    var start = new Date().getTime();
+
+    // 模拟网络延迟加载
+    while(true)  if(new Date().getTime()-start > 1000*1) break;
 
   
   return new Promise((resolve,reject)=>{
@@ -76,7 +104,6 @@ export const requestUtil=(params)=>{
      header:header,
      url:baseUrl+params.url,
      success:(result)=>{
-       console.log("result:"+result)
        resolve(result.data);
      },
      fail:(err)=>{

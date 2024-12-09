@@ -23,9 +23,10 @@ Page({
 
   // 获取商品大类数据
   async getCates(){
+    console.log("getCates")
     const result=await requestUtil({url: "/bigType/findCategories"});
     const baseUrl=getBaseUrl();
-    console.log(result)
+    console.log("getCates:"+result)
     this.Cates=result.message;
 
     // 把接口的数据存入本地缓存
@@ -37,6 +38,27 @@ Page({
       leftMenuList,
       rightContent,
       baseUrl
+    })
+  },
+
+  // 获取商品大类数据 从首页跳转过来的
+  async getCates2(index){
+    console.log("getCates")
+    const result=await requestUtil({url: "/bigType/findCategories"});
+    const baseUrl=getBaseUrl();
+    console.log("getCates:"+result)
+    this.Cates=result.message;
+
+    // 把接口的数据存入本地缓存
+    wx.setStorageSync('cates', {time:Date.now(),data:this.Cates})
+
+    let leftMenuList=this.Cates.map(v=>v.name);
+    let rightContent=this.Cates[index].smallTypeList;
+    this.setData({
+      leftMenuList,
+      rightContent,
+      baseUrl,
+      currentIndex:index
     })
   },
 
@@ -56,6 +78,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("onload")
     const Cates=wx.getStorageSync('cates');
     if(!Cates){
       this.getCates();
@@ -88,7 +111,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log("onShow")
 
+    const app=getApp();
+    var index=app.globalData.index;
+    console.log("index:"+index)
+    if(index!=-1){
+      this.getCates2(index);
+     
+      // 用完后重置
+      app.globalData.index=-1
+    }
   },
 
   /**

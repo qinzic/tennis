@@ -17,7 +17,7 @@ page,view,text,swiper,swiper-item,image,navigator{
 */
 page{
   /* 主题颜色 */
-  --themeColor:#FF5700;
+  --themeColor:#ddcdac;
   /* 字体大小 rpx自适应大小 */
   font-size: 28rpx;
 }

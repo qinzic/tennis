@@ -1,11 +1,14 @@
-// pages/my/index.js
+// 导入request请求工具方法
+import {getBaseUrl, requestUtil,getLogin,getUserProfile, requestPay} from "../../utils/requestUtil.js";
+import regeneratorRuntime from '../../lib/runtime/runtime';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userInfo:{}
   },
 
   /**
@@ -13,54 +16,80 @@ Page({
    */
   onLoad: function (options) {
 
+    // 判断缓存中是否有token
+    const token=wx.getStorageSync('token');
+    if(!token){
+      // const {code}=await login();
+      // wx.getUserProfile({
+      //   desc: '获取用户信息',
+      //   success: (res)=>{
+      //     const {encryptedData,rawData,iv,signature}=res;
+          
+      //     console.log(code,encryptedData,rawData,iv,signature)
+      //   },
+      //   fail:()=>{
+      //     console.log("登录失败")
+      //   }
+      // })
+
+      wx.showModal({
+        title:'友情提示',
+        content:'微信授权登录后，才可进入个人中心',
+        success:(res)=>{
+
+          Promise.all([getLogin(),getUserProfile()]).then((res)=>{
+            console.log(res)
+            let loginParam={
+              code:res[0].code,
+              nickName:res[1].userInfo.nickName,
+              avatarUrl:res[1].userInfo.avatarUrl
+            }
+            console.log(loginParam);
+            // 把用户信息放到缓存中
+            wx.setStorageSync('userInfo', res[1].userInfo);
+            this.wxlogin(loginParam);
+            this.setData({userInfo:res[1].userInfo});
+          })
+        }
+      })
+    }else{
+      console.log("token:"+token);
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
+  
+  // 点击 编辑收货地址
+  handleEditAddress(){
+    console.log("编辑收货地址")
+    wx.chooseAddress({
+    
+    });
+
+  },
+
+    /**
+   * 请求后端获取用户token
+   * @param {} loginParam 
    */
-  onReady: function () {
-
+  async wxlogin(loginParam){
+    // 发送请求 获取用户的token
+    const result=await requestUtil({url:"/users/wxlogin",data:loginParam,method:"post"});
+    let token=result.token;
+    if(result.code==0){
+      // 存储token到缓存
+      wx.setStorageSync('token', token);
+    
+    }
   },
+
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    console.log("onShow")
+    const userInfo=wx.getStorageSync('userInfo');
+    this.setData({userInfo});
   }
+
 })

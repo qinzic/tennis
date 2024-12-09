@@ -1,5 +1,5 @@
 // 导入request请求工具方法
-import {getBaseUrl, requestUtil,getLogin,getUserProfile} from "../../utils/requestUtil.js";
+import {getBaseUrl, requestUtil,getLogin,getUserProfile, requestPay} from "../../utils/requestUtil.js";
 import regeneratorRuntime from '../../lib/runtime/runtime';
 Page({
 
@@ -50,7 +50,9 @@ Page({
           nickName:res[1].userInfo.nickName,
           avatarUrl:res[1].userInfo.avatarUrl
         }
-        console.log(loginParam)
+        console.log(loginParam);
+        // 把用户信息放到缓存中
+        // wx.setStorageSync('userInfo', res[1].userInfo);
         this.wxlogin(loginParam);
       })
     }else{
@@ -81,37 +83,63 @@ Page({
    * 创建订单
    */
   async createOrder(token){
-    const header={Authorization:token};  // 请求头参数
-    const totalPrice=this.data.totalPrice; // 请求体 总价
-    const address=this.data.address.provinceName+this.data.address.cityName+this.data.address.countyName+this.data.address.detailInfo; // 请求体 收货地址
-    const consignee=this.data.address.userName; // 请求体 收货人
-    const telNumber=this.data.address.telNumber; // 请求体 联系电话
-    let goods=[];
-    this.data.cart.forEach(v=>goods.push({
-      goodsId:v.id,
-      goodsNumber:v.num,
-      goodsPrice:v.price,
-      goodsName:v.name,
-      goodsPic:v.proPic
-    }))
-    console.log(goods)
-    //  发送请求 创建订单
-    const orderParams={
-      totalPrice,
-      address,
-      consignee,
-      telNumber,
-      goods
-    }
-    const res=await requestUtil({url:"/my/order/create",method:"POST",data:orderParams,header});
-    if(res.code==0){
+   try{
+     // const header={Authorization:token};  // 请求头参数
+      const totalPrice=this.data.totalPrice; // 请求体 总价
+      const address=this.data.address.provinceName+this.data.address.cityName+this.data.address.countyName+this.data.address.detailInfo; // 请求体 收货地址
+      const consignee=this.data.address.userName; // 请求体 收货人
+      const telNumber=this.data.address.telNumber; // 请求体 联系电话
+      let goods=[];
+      this.data.cart.forEach(v=>goods.push({
+        goodsId:v.id,
+        goodsNumber:v.num,
+        goodsPrice:v.price,
+        goodsName:v.name,
+        goodsPic:v.proPic
+      }))
+      console.log(goods)
+      //  发送请求 创建订单
+      const orderParams={
+        totalPrice,
+        address,
+        consignee,
+        telNumber,
+        goods
+      }
+      const res=await requestUtil({url:"/my/order/create",method:"POST",data:orderParams});
+    
       console.log(res.orderNo);
       let orderNo=res.orderNo;
-      const preparePayRes=await requestUtil({url:"/my/order/preparePay",method:"POST",data:orderNo,header});
-    }
+      console.log("orderNo:"+orderNo);
+      // const preparePayRes=await requestUtil({url:"/my/order/preparePay",method:"POST",data:orderNo});
+      // console.log("preparePayRes:"+preparePayRes)
+      // let payRes=await requestPay(preparePayRes);
+      
+      // 删除缓冲中 已经支付的商品
+      let newCart=wx.getStorageSync('cart');
+      newCart=newCart.filter(v=>!v.checked);
 
-  
- 
+      wx.setStorageSync('cart', newCart);
+
+      wx.showToast({
+        title: '支付成功',
+        icon:'none'
+      });
+
+      wx.navigateTo({
+        url: '/pages/order/index?type=0',
+      })
+
+
+   }catch(error){
+    console.log(error);
+    wx.showToast({
+      title: '支付失败',
+      icon:'none'
+    })
+
+   }
+
   },
 
 

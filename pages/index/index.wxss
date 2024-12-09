@@ -20,7 +20,8 @@
 }
 .index_hot_product .product_title {
   font-size: 32rpx;
-  background-color: #E0E0E0;
+  background-color: #000000;
+  color: #F5F5F5;
   font-weight: 600;
   padding: 20rpx;
   color: var(--themeColor);

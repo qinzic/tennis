@@ -60,6 +60,18 @@ Page({
     this.setData({
       hotProductList:result.message
     })
+  },
+
+  // 大类点击事件处理 存储商品类别到全局数据
+  handleTypeJump(event){
+    var index=event.currentTarget.dataset.index;
+    console.log("index:"+index)
+    const app=getApp();
+    app.globalData.index=index;
+  
+    wx.switchTab({
+      url: '/pages/category/index'
+    })
   }
 
   

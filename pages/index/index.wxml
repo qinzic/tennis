@@ -37,6 +37,8 @@
   <view class="index_bigType">
         <view class="bigTypeRow">
           <navigator
+          bindtap="handleTypeJump"
+          data-index="{{index}}"
           wx:for="{{bigTypeList_row1}}"
           wx:for-item="bigType"
           wx:for-index="index"
@@ -46,6 +48,8 @@
         </view>
         <view class="bigTypeRow">
           <navigator
+          bindtap="handleTypeJump"
+          data-index="{{index+5}}"
           wx:for="{{bigTypeList_row2}}"
           wx:for-item="bigType"
           wx:for-index="index"
@@ -60,7 +64,7 @@
   <!-- 商品热卖推荐 开始 -->
   <view class="index_hot_product">
     <view class="product_title">
-     热卖推荐
+     小榧推荐
     </view>
     <view class="list">
       <view class="product_detail" 
@@ -73,7 +77,7 @@
           <image mode="widthFix" src="{{baseUrl+'image/product/'+hotProduct.proPic}}"></image>
           <view class="product_name">{{hotProduct.name}}</view>
           <view class="product_price"> ¥ {{hotProduct.price}}</view>
-          <button size="mini" type="warn">立即购买</button>
+          <button size="mini" type="warn" style="background-color: #f3de98; color: white;">立即查询</button>
         </navigator>
       </view>
     </view>

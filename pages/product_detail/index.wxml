@@ -22,7 +22,7 @@
 <view class="desc_tabs">
   <view class="tabs_title">
     <view class="title_item {{activeIndex==0?'active':''}}" bindtap="handleItemTap" data-index="0">商品介绍</view>
-    <view class="title_item {{activeIndex==1?'active':''}}" bindtap="handleItemTap" data-index="1">规格参数</view>
+    <view class="title_item {{activeIndex==1?'active':''}}" bindtap="handleItemTap" data-index="1">商品成分</view>
   </view>
   <view class="tabs_content">
       <block wx:if="{{activeIndex==0}}">
@@ -43,7 +43,7 @@
   </navigator>
 
   <view class="tool_item">
-    <view class="iconfont icon-kefu"></view>
+    <view class="iconfont icon-kefufenxiermaikefu"></view>
     <view>客服</view>
     <button open-type="contact"></button>
   </view>

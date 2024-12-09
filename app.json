@@ -3,20 +3,22 @@
     "pages/index/index",
     "pages/category/index",
     "pages/cart/index",
+    "pages/wenlv/index",
     "pages/my/index",
     "pages/search/index",
     "pages/product_detail/index",
-    "pages/pay/index"
+    "pages/pay/index",
+    "pages/order/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FF5700",
-    "navigationBarTitleText": "java1234商城",
+    "navigationBarBackgroundColor": "#e9d6af",
+    "navigationBarTitleText": "丰农秋韵商城",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#999",
-    "selectedColor": "#ff2d4a",
+    "selectedColor": "#FF5700",
     "backgroundColor": "#fafafa",
     "position": "bottom",
     "borderStyle": "black",
@@ -27,12 +29,17 @@
       "selectedIconPath": "icons/home.png"
     },{
       "pagePath": "pages/category/index",
-      "text": "分类",
-      "iconPath": "icons/_category.png",
+      "text": "社区",
+      "iconPath": "icons/comm.png",
       "selectedIconPath": "icons/category.png"
     },{
+      "pagePath": "pages/wenlv/index",
+      "text": "预约",
+      "iconPath": "icons/wl.png",
+      "selectedIconPath": "icons/wenlv.png"
+    },{
       "pagePath": "pages/cart/index",
-      "text": "购物车",
+      "text": "商城",
       "iconPath": "icons/_cart.png",
       "selectedIconPath": "icons/cart.png"
     },{
@@ -44,5 +51,10 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "requiredPrivateInfos": [
+    "chooseAddress",
+    "getLocation",
+    "chooseLocation"
+  ]
 }
