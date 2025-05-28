@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.java1234.mapper.ReservationMapper">
+
+    <!-- 查询预订列表 -->
+    <select id="list" parameterType="Map" resultType="com.java1234.entity.Reservation">
+        <!-- 使用显式字段代替 * 以提升性能 -->
+        SELECT *
+        FROM t_reservations
+        WHERE 1=1
+        <if test="nickName != null and nickName.trim() != ''">
+            AND nickName LIKE CONCAT('%', #{nickName}, '%')
+        </if>
+        <if test="start != null and start >= 0 and pageSize != null and pageSize > 0">
+            LIMIT #{start}, #{pageSize}
+        </if>
+    </select>
+
+    <!-- 获取总记录数 -->
+    <select id="getTotal" parameterType="Map" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM t_reservations
+        WHERE 1=1
+        <if test="nickName != null and nickName.trim() != ''">
+            AND nickName LIKE CONCAT('%', #{nickName}, '%')
+        </if>
+    </select>
+
+</mapper>
