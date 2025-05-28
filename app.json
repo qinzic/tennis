@@ -13,7 +13,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#e9d6af",
-    "navigationBarTitleText": "丰农秋韵商城",
+    "navigationBarTitleText": "校园网球预约商城",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
@@ -29,7 +29,7 @@
       "selectedIconPath": "icons/home.png"
     },{
       "pagePath": "pages/category/index",
-      "text": "社区",
+      "text": "分类",
       "iconPath": "icons/comm.png",
       "selectedIconPath": "icons/category.png"
     },{
@@ -39,7 +39,7 @@
       "selectedIconPath": "icons/wenlv.png"
     },{
       "pagePath": "pages/cart/index",
-      "text": "商城",
+      "text": "校园购",
       "iconPath": "icons/_cart.png",
       "selectedIconPath": "icons/cart.png"
     },{

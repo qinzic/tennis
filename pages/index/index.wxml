@@ -23,7 +23,6 @@
       wx:for="{{swiperList}}"
       wx:for-item="swiper"
       wx:key="id"
-
       >
         <navigator url="/pages/product_detail/index?id={{swiper.id}}">
           <image mode="widthFix" src="{{baseUrl+'image/swiper/'+swiper.swiperPic}}"></image>
@@ -33,7 +32,7 @@
   </view>
   <!-- 轮播图 结束 -->
   
-  <!-- 商品大类分类 开始 -->
+  <!-- 大类分类 开始 -->
   <view class="index_bigType">
         <view class="bigTypeRow">
           <navigator
@@ -59,12 +58,12 @@
         </view>
      
   </view>
-  <!-- 商品大类分类 结束 -->
+  <!-- 大类分类 结束 -->
 
-  <!-- 商品热卖推荐 开始 -->
+  <!-- 信息通知 开始 -->
   <view class="index_hot_product">
     <view class="product_title">
-     小榧推荐
+     校园推荐
     </view>
     <view class="list">
       <view class="product_detail" 
@@ -77,10 +76,10 @@
           <image mode="widthFix" src="{{baseUrl+'image/product/'+hotProduct.proPic}}"></image>
           <view class="product_name">{{hotProduct.name}}</view>
           <view class="product_price"> ¥ {{hotProduct.price}}</view>
-          <button size="mini" type="warn" style="background-color: #f3de98; color: white;">立即查询</button>
+          <button size="mini" type="warn" style="background-color: #f3de98; color: white;">立即购买</button>
         </navigator>
       </view>
     </view>
   </view>
-  <!-- 商品热卖推荐 结束 -->
+  <!-- 校园推荐 结束 -->
 </view>

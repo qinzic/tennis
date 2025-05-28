@@ -1,5 +1,125 @@
 <view class="container">
-  <view class="wenlv-content">
-    文旅页面内容
+  <!-- 活动标题区域 -->
+  <view class="activity_header">
+    <!-- 网球场Logo -->
+    <image class="activity_logo" src="../../icons/tennis.png" mode="widthFix"/>
+    <view class="activity_title">
+      <text class="title_text">ZCMU滨文网球场reservation通道(校内)</text>
+      <!-- 发起人信息 -->
+      <view class="organizer">
+        <text>发起人: 陈师傅</text>
+        <text class="contact">联系TA</text>
+      </view>
+    </view>
   </view>
-</view> 
+
+  <!-- 功能按钮区: 分享、海报生成、订单凭证 -->
+  <view class="function_area">
+    <!-- 分享按钮 -->
+    <view class="function_item" bindtap="handleShare">
+      <view class="iconfont icon-share"></view>
+      <text>邀请/分享</text>
+    </view>
+    <!-- 海报生成按钮 -->
+    <view class="function_item" bindtap="handleShowPoster">
+      <view class="iconfont icon-poster"></view>
+      <text>生成海报</text>
+    </view>
+    <!-- 订单凭证按钮 -->
+    <view class="function_item" bindtap="handleShowTicket">
+      <view class="iconfont icon-ticket"></view>
+      <text>我的预约</text>
+    </view>
+  </view>
+
+  <!-- 入场须知 -->
+  <view class="notice_section">
+    <view class="section_title">详情信息</view>
+    <view class="notice_content">
+      <text>入场须知：</text>
+      <text>1.入场人员携带相关有效证件，便于工作人员登记核验。</text>
+      <text>2.严禁在场内吸烟、吃口香糖、乱扔果壳、乱倒饮料及易燃易爆物品；严禁用刀、...</text>
+    </view>
+    <view class="booking_time">
+      ※ 每周三 08:00，开放「当周」可约时段
+    </view>
+  </view>
+
+  <!-- 时间选择区 -->
+  <view class="time_section">
+    <view class="section_title">选择时间</view>
+    <view class="date_scroll">
+      <view class="date_item {{item.date === selectedDate ? 'active' : ''}}" 
+        wx:for="{{dateList}}" 
+        wx:key="date"
+        bindtap="handleDateSelect"
+        data-index="{{index}}">
+        <text class="day">{{item.day}}</text>
+        <text class="date">{{item.date}}</text>
+        <text class="status">{{item.status}}</text>
+      </view>
+    </view>
+    
+    <!-- 注释掉的时间段选择区 -->
+    <!--
+    <view class="time_slots">
+      <view class="time_item {{item.time === selectedTimeSlot ? 'active' : ''}} {{item.remaining <= 0 ? 'disabled' : ''}}" 
+        wx:for="{{timeSlots}}" 
+        wx:key="time"
+        bindtap="handleTimeSlotSelect"
+        data-index="{{index}}">
+        <text>{{item.time}}</text>
+        <text class="remaining">剩余 {{item.remaining}}</text>
+      </view>
+    </view>
+    -->
+  </view>
+
+  <!-- 场地选择区 -->
+  <view class="venue_section">
+    <view class="section_title">场地选择<text class="subtitle">(图片可点击)</text></view>
+    <view class="venue_list">
+      <view class="venue_item {{selectedVenueId === item.id ? 'selected' : ''}}" 
+        wx:for="{{venues}}" 
+        wx:key="id"
+        bindtap="handleVenueSelect"
+        data-id="{{item.id}}">
+        <image src="{{item.imageUrl}}" 
+               mode="aspectFit"
+               lazy-load
+               binderror="handleImageError"
+               data-id="{{item.id}}"/>
+        <view class="venue_info">
+          <text class="venue_name">{{item.name}}</text>
+          <text class="venue_desc">{{item.description}}</text>
+          <view class="venue_status">
+            <text class="{{item.status === '可用' ? 'available' : 'unavailable'}}">
+              {{item.status}}
+            </text>
+          </view>
+        </view>
+        <view class="venue_select">
+          <view class="checkbox {{selectedVenueId === item.id ? 'checked' : ''}}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部预约按钮 -->
+  <view class="bottom_btn">
+    <button class="book_btn {{isBooking ? 'bounce' : ''}}" 
+            bindtap="handleBooking">我要预约</button>
+  </view>
+
+  <!-- 海报预览弹窗 -->
+  <view class="poster_modal" wx:if="{{showPoster}}">
+    <!-- 遮罩层：点击关闭弹窗 -->
+    <view class="modal_mask" bindtap="handleClosePoster"></view>
+    <!-- 海报内容区 -->
+    <view class="modal_content">
+      <image src="{{baseUrl}}image/poster/{{posterImage}}" 
+             mode="widthFix"
+             show-menu-by-longpress></image>
+    </view>
+  </view>
+</view>

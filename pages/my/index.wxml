@@ -47,7 +47,7 @@
         <text>400-699-3579</text>
       </view>
       <view class="app_info_item">
-        <button  open-type="feedback" class="feedback">意见反馈</button>
+        <button  open-type="feedback" class="feedback">评论反馈</button>
       </view>
       <view class="app_info_item">
         关于我们

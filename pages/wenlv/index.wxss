@@ -1,8 +1,390 @@
+/* 容器样式 */
 .container {
+  padding: 0 20rpx;
+  background-color: #f7f7f7;
+  padding-bottom: 120rpx;
+}
+
+/* 活动头部样式 */
+.activity_header {
+  display: flex;
+  padding: 20rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+/* Logo图片样式 */
+.activity_logo {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+/* 标题区域样式 */
+.activity_title {
+  flex: 1;
+}
+
+/* 标题文本样式 */
+.title_text {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+/* 发起人信息样式 */
+.organizer {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 联系按钮样式 */
+.contact {
+  color: #3a8ee6;
+  margin-left: 20rpx;
+}
+
+/* 功能按钮区样式 */
+.function_area {
+  display: flex;
+  justify-content: space-around;
+  padding: 30rpx 0;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+/* 功能按钮项样式 */
+.function_item {
+  text-align: center;
+  font-size: 24rpx;
+  color: #3a8ee6;
+  background-color: #ecf5ff;
+  padding: 15rpx 30rpx;
+  border-radius: 30rpx;
+  min-width: 160rpx;
+}
+
+/* 功能按钮图标样式 */
+.function_item .iconfont {
+  font-size: 40rpx;
+  margin-bottom: 8rpx;
+  color: #3a8ee6;
+}
+
+/* 功能按钮文字样式 */
+.function_item text {
+  display: block;
+  line-height: 1.2;
+}
+
+/* 其他区域通用样式 */
+.notice_section, .time_section, .venue_section {
+  background-color: #fff;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 10rpx;
+}
+
+/* 海报模态框样式 */
+.poster_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+/* 模态框遮罩层 */
+.modal_mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* 模态框内容区 */
+.modal_content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  background: #fff;
+  border-radius: 10rpx;
   padding: 20rpx;
 }
 
-.wenlv-content {
+/* 模态框图片 */
+.modal_content image {
+  width: 100%;
+  border-radius: 8rpx;
+}
+
+/* 日期选择区域 */
+.date_scroll {
+  padding: 20rpx;
+  white-space: normal;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 两列 */
+  grid-template-rows: repeat(3, 1fr); /* 三行 */
+  gap: 20rpx; /* 格子之间的间距 */
+}
+
+.date_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx;
+  background-color: #f7f7f7;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+  min-height: 120rpx;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.date_item .day {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.date_item .date {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.date_item .status {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.date_item.active {
+  background-color: #3a8ee6;
+}
+
+.date_item.active .day,
+.date_item.active .date,
+.date_item.active .status {
+  color: #fff;
+}
+
+/* 添加点击动画效果 */
+.date_item:active {
+  transform: scale(0.95);
+}
+
+.date_item.active {
+  animation: selected 0.3s ease;
+}
+
+@keyframes selected {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* 时间选择区域样式 */
+.time_slots {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 两列 */
+  grid-template-rows: repeat(3, 1fr); /* 三行 */
+  gap: 20rpx; /* 格子之间的间距 */
+  padding: 20rpx;
+}
+
+.time_item {
+  background-color: #fff;
+  border: 2rpx solid #eee;
+  border-radius: 10rpx;
+  padding: 20rpx;
   text-align: center;
-  padding: 30rpx;
-} 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 120rpx;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.time_item text {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.time_item .remaining {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.time_item.active {
+  background-color: #3a8ee6;
+  border-color: #3a8ee6;
+}
+
+.time_item.active text,
+.time_item.active .remaining {
+  color: #fff;
+}
+
+.time_item.disabled {
+  background-color: #f5f5f5;
+  border-color: #eee;
+  cursor: not-allowed;
+}
+
+.time_item.disabled text,
+.time_item.disabled .remaining {
+  color: #999;
+}
+
+/* 添加选中和禁用状态的动画效果 */
+.time_item:not(.disabled):active {
+  transform: scale(0.95);
+}
+
+.time_item.active:not(.disabled) {
+  animation: selected 0.3s ease;
+}
+
+@keyframes selected {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* 场地选择区域样式 */
+.venue_list .venue_item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+  background-color: #fff;
+}
+
+.venue_item.selected {
+  background-color: #f8f8f8;
+}
+
+.venue_item image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 20rpx;
+}
+
+.venue_info {
+  flex: 1;
+}
+
+.venue_name {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.venue_desc {
+  font-size: 26rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+/* 自定义复选框样式 */
+.venue_select {
+  padding: 20rpx;
+}
+
+.checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #ddd;
+  border-radius: 50%;
+  position: relative;
+}
+
+.checkbox.checked {
+  background-color: #3a8ee6;
+  border-color: #3a8ee6;
+}
+
+.checkbox.checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20rpx;
+  height: 20rpx;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+/* 底部预约按钮容器 */
+.bottom_btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx;
+  background-color: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 预约按钮样式 */
+.book_btn {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background-color: #3a8ee6;
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 40rpx;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+/* 按钮点击效果 */
+.book_btn:active {
+  opacity: 0.8;
+  transform: scale(0.95);
+}
+
+/* 按钮弹跳动画 */
+@keyframes bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.bounce {
+  animation: bounce 0.3s ease;
+}
+
+/* 场地状态样式 */
+.venue_status {
+  margin-top: 10rpx;
+}
+
+.venue_status .available {
+  color: #67C23A;
+  font-size: 24rpx;
+  background: rgba(103, 194, 58, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+}
+
+.venue_status .unavailable {
+  color: #F56C6C;
+  font-size: 24rpx;
+  background: rgba(245, 108, 108, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+}
