@@ -9,10 +9,9 @@ import java.util.List;
 
 /**
  * 商品大类
+ * 系统级静态变量
  * @author java1234_小锋
- * @site www.java1234.com
- * @company
- * @create 2021-11-22 22:03
+ * @create 2024-08-13 上午 9:51
  */
 @TableName("t_bigType")
 @Data

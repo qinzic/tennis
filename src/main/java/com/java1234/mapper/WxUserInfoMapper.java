@@ -5,10 +5,8 @@ import com.java1234.entity.WxUserInfo;
 
 /**
  * 微信用户Mapper接口
- * @author java1234_小锋
- * @site www.java1234.com
- * @company 南通小锋网络科技有限公司
- * @create 2021-11-23 8:53
+ * @author java1234_小泽
+ * @create 2024-12-13 上午 9:51
  */
 public interface WxUserInfoMapper extends BaseMapper<WxUserInfo> {
 

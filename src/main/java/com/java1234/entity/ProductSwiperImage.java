@@ -5,10 +5,9 @@ import lombok.Data;
 
 /**
  * 产品轮播图片
- * @author java1234_小锋
- * @site www.java1234.com
- * @company 南通小锋网络科技有限公司
- * @create 2021-12-14 12:54
+ * 系统级静态变量
+ * @author java1234_小泽
+ * @create 2024-08-13 上午 9:51
  */
 @TableName("t_product_swiper_image")
 @Data

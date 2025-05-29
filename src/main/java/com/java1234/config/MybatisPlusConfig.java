@@ -5,11 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * MybatisPlus配置类
+ * 系统级静态变量
  * @author java1234_小锋
- * @site www.java1234.com
- * @company
- * @create 2024-10-30 8:10
+ * @create 2024-08-13 上午 9:51
  */
 @Configuration
 public class MybatisPlusConfig {

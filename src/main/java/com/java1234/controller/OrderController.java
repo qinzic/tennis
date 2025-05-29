@@ -18,11 +18,9 @@ import java.security.MessageDigest;
 import java.util.*;
 
 /**
- * 订单Controller控制器
+ * 系统级静态变量
  * @author java1234_小锋
- * @site www.java1234.com
- * @company 南通小锋网络科技有限公司
- * @create 2022-01-12 11:00
+ * @create 2024-08-13 上午 9:51
  */
 @RestController
 @RequestMapping("/my/order/")

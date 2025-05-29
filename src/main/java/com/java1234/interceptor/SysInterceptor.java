@@ -14,10 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 鉴权拦截器
- * @author java1234_小锋
- * @site www.java1234.com
- * @company Java知识分享网
- * @create 2021-01-29 14:11
+ * 系统级静态变量
+ * @author java1234_小泽
+ * @create 2024-08-13 上午 9:51
  */
 public class SysInterceptor implements HandlerInterceptor {
 

@@ -18,10 +18,9 @@ import java.util.Map;
 
 /**
  * 场地控制器
+ * 系统级静态变量
  * @author java1234_小锋
- * @site www.java1234.com
- * @company
- * @create 2024-12-24 9:16
+ * @create 2024-08-13 上午 9:51
  */
 @RestController
 @RequestMapping("/venue")

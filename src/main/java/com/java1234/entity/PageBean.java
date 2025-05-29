@@ -2,10 +2,9 @@ package com.java1234.entity;
 
 /**
  * 分页Model类
- * @author java1234_小锋
- * @site www.java1234.com
- * @company Java知识分享网
- * @create 2020-02-16 上午 11:05
+ * 系统级静态变量
+ * @author java1234_小泽
+ * @create 2024-08-13 上午 9:51
  */
 public class PageBean {
 

@@ -50,12 +50,12 @@ public class WebAppConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/image/swiper/**").addResourceLocations("file:D:\\code\\java1234-mall-picture\\swiperImgs\\");
-        registry.addResourceHandler("/image/bigType/**").addResourceLocations("file:D:\\code\\java1234-mall-picture\\bigTypeImgs\\");
-        registry.addResourceHandler("/image/product/**").addResourceLocations("file:D:\\code\\java1234-mall-picture\\productImgs\\");
-        registry.addResourceHandler("/image/productSwiperImgs/**").addResourceLocations("file:D:\\code\\java1234-mall-picture\\productSwiperImgs\\");
-        registry.addResourceHandler("/image/productIntroImgs/**").addResourceLocations("file:D:\\code\\java1234-mall-picture\\productIntroImgs\\");
-        registry.addResourceHandler("/image/productParaImgs/**").addResourceLocations("file:D:\\code\\java1234-mall-picture\\productParaImgs\\");
+        registry.addResourceHandler("/image/swiper/**").addResourceLocations("file:D:\\tennis\\java1234-mall-picture\\swiperImgs\\");
+        registry.addResourceHandler("/image/bigType/**").addResourceLocations("file:D:\\tennis\\java1234-mall-picture\\bigTypeImgs\\");
+        registry.addResourceHandler("/image/product/**").addResourceLocations("file:D:\\tennis\\java1234-mall-picture\\productImgs\\");
+        registry.addResourceHandler("/image/productSwiperImgs/**").addResourceLocations("file:D:\\tennis\\java1234-mall-picture\\productSwiperImgs\\");
+        registry.addResourceHandler("/image/productIntroImgs/**").addResourceLocations("file:D:\\tennis\\java1234-mall-picture\\productIntroImgs\\");
+        registry.addResourceHandler("/image/productParaImgs/**").addResourceLocations("file:D:\\tennis\\java1234-mall-picture\\productParaImgs\\");
     }
 
 
