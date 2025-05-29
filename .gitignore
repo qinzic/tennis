@@ -2,7 +2,6 @@
 node_modules
 /dist
 
-
 # local env files
 .env.local
 .env.*.local
@@ -13,7 +12,14 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Editor directories and files
+# Java/Maven 相关（来自远程）
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IDE 配置（合并双方）
 .idea
 .vscode
 *.suo
@@ -21,3 +27,22 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+*.iws
+*.iml
+*.ipr
+
+# 其他工具配置
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
