@@ -26,6 +26,12 @@ const routes = [
         component: () =>
           import( "../views/appoint"),
       },
+            {
+        path: "/site",
+        name: "场地管理",
+        component: () =>
+          import( "../views/site"),
+      },
       {
         path: "/modifyPassword",
         name: "修改密码",

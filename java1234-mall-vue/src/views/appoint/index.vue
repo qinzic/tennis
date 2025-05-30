@@ -14,11 +14,19 @@
 
       <el-table-column prop="avatarUrl" label="用户头像" width="120">
         <template v-slot="scope">
-          <img :src="scope.row.userAvatar" width="50" height="50" />
+          <img :src="scope.row.avatarUrl" width="50" height="50" />
         </template>
       </el-table-column>
 
       <el-table-column prop="reservationTime" label="申请时间" width="180" />
+
+      <!-- 新增时间段列 -->
+      <el-table-column label="预约时间段" width="180">
+        <template v-slot="scope">
+          <!-- 显示预约的时间段字符串，如 "08:00 - 10:00" -->
+          {{ scope.row.timeSlotStart }} - {{ scope.row.timeSlotEnd }}
+        </template>
+      </el-table-column>
 
       <!-- 预约状态列 -->
       <el-table-column prop="reservationStatus" label="预约状态" width="150">
@@ -29,7 +37,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="action" label="操作" width="400" fixed="right" align="center">
+      <el-table-column prop="action" label="操作" width="350" fixed="right" align="center">
         <template v-slot="scope">
           <el-button
             type="success"
@@ -53,9 +61,6 @@
       v-model:currentPage="queryForm.pageNum"
       :page-sizes="[10, 20, 30, 40, 50]"
       :page-size="queryForm.pageSize"
-      :small="small"
-      :disabled="disabled"
-      :background="background"
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
       @size-change="handleSizeChange"
@@ -65,13 +70,13 @@
 </template>
 
 <script setup>
-import { Search } from '@element-plus/icons-vue';
 import { ref } from 'vue';
-import axios from '@/util/axios';
+import { Search } from '@element-plus/icons-vue';
 import { ElMessage } from 'element-plus';
+import axios from '@/util/axios';
 
 const queryForm = ref({
-  query: '', // 查询条件，修改为用户昵称
+  query: '',
   pageNum: 1,
   pageSize: 10,
 });
@@ -79,14 +84,24 @@ const queryForm = ref({
 const total = ref(0);
 const tableData = ref([]);
 
-// 初始化预约列表
+// 预约列表初始化（含时间段信息）
 const initReservationList = async () => {
   const res = await axios.post('admin/reservation/list', queryForm.value);
-  tableData.value = res.data.reservationList.map((item) => ({
-    ...item,
-    actionDisabled: false, // 默认操作按钮未禁用
-  }));
-  total.value = res.data.total;
+  if (res.data.code === 0) {
+    tableData.value = res.data.reservationList.map(item => {
+      // 找出对应的预约时间段
+      const matchedSlot = item.timeSlots?.find(ts => ts.id === item.timeSlotId);
+      return {
+        ...item,
+        actionDisabled: item.reservationStatus !== 0, // 审核中才可操作
+        timeSlotStart: matchedSlot ? matchedSlot.startTime : '',
+        timeSlotEnd: matchedSlot ? matchedSlot.endTime : '',
+      };
+    });
+    total.value = res.data.total;
+  } else {
+    ElMessage.error(res.data.msg || '获取预约列表失败');
+  }
 };
 
 initReservationList();
@@ -102,60 +117,50 @@ const handleCurrentChange = (pageNum) => {
   initReservationList();
 };
 
-// 获取预约状态对应的文本
 const getStatusText = (status) => {
   switch (status) {
-    case 0:
-      return '待审核';
-    case 1:
-      return '已批准';
-    case 2:
-      return '已拒绝';
-    default:
-      return '未知';
+    case 0: return '待审核';
+    case 1: return '已批准';
+    case 2: return '已拒绝';
+    default: return '未知';
   }
 };
 
-// 获取预约状态对应的类型，用于 el-tag 样式
 const getStatusType = (status) => {
   switch (status) {
-    case 0:
-      return 'warning'; // 待审核
-    case 1:
-      return 'success'; // 已批准
-    case 2:
-      return 'danger'; // 已拒绝
-    default:
-      return 'info';
+    case 0: return 'warning';
+    case 1: return 'success';
+    case 2: return 'danger';
+    default: return 'info';
   }
 };
 
-// 批准预约
+// 批准预约，同时减少对应时间段剩余容量
 const handleApproveReservation = async (row) => {
   const res = await axios.post('admin/reservation/approve', { id: row.id });
   if (res.data.code === 0) {
     ElMessage.success('批准成功！');
-    row.reservationStatus = 1; // 更新状态为已批准
-    row.actionDisabled = true; // 禁用操作按钮
+    row.reservationStatus = 1;
+    row.actionDisabled = true;
   } else {
-    ElMessage.error(res.data.msg);
+    ElMessage.error(res.data.msg || '操作失败');
   }
 };
 
-// 拒绝预约
+// 拒绝预约，不影响容量
 const handleRejectReservation = async (row) => {
   const res = await axios.post('admin/reservation/reject', { id: row.id });
   if (res.data.code === 0) {
     ElMessage.success('拒绝成功！');
-    row.reservationStatus = 2; // 更新状态为已拒绝
-    row.actionDisabled = true; // 禁用操作按钮
+    row.reservationStatus = 2;
+    row.actionDisabled = true;
   } else {
-    ElMessage.error(res.data.msg);
+    ElMessage.error(res.data.msg || '操作失败');
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .header {
   padding-bottom: 16px;
   box-sizing: border-box;
@@ -166,7 +171,6 @@ const handleRejectReservation = async (row) => {
   box-sizing: border-box;
 }
 
-/* 给操作列加上额外的右边距离 */
 .el-table .cell {
   text-align: center;
 }
