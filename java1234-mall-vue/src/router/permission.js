@@ -1,6 +1,6 @@
 import router from "@/router/index";
 
-const whiteList=['/login']
+const whiteList=['/login' , '/register']
 /**/router.beforeEach((to,from,next)=>{
 
   let token=window.sessionStorage.getItem("token");

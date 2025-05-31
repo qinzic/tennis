@@ -38,7 +38,6 @@
   import  axios from '@/util/axios'
   import {ElMessage} from 'element-plus'
   import {getServerUrl} from "@/config/sys";
-  import router from '@/router'
 
   const form=ref({
     userName: '',
@@ -95,6 +94,7 @@
   }
   // 注册页面跳转逻辑
   const goToRegister = () => {
+    console.log("跳转中...") 
     router.push('/register');
   };
 
