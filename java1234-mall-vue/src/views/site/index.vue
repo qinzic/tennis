@@ -19,10 +19,13 @@
       <el-table-column label="容量（剩余/总）" width="200">
         <template v-slot="scope">
           <!-- 显示每个时间段容量 -->
-          <div v-for="ts in scope.row.timeSlots" :key="ts.id" style="margin-bottom:6px;">
-            <strong>{{ ts.startTime }} - {{ ts.endTime }}:</strong>
-            {{ ts.remainingCapacity }} / {{ ts.capacity }}
+          <div v-if="scope.row.timeSlots && scope.row.timeSlots.length">
+            <div v-for="ts in scope.row.timeSlots" :key="ts.id" style="margin-bottom:6px;">
+              <strong>{{ ts.startTime }} - {{ ts.endTime }}:</strong>
+              {{ ts.remainingCapacity }} / {{ ts.capacity }}
+            </div>
           </div>
+          <div v-else>无时间段信息</div>
         </template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="100">
@@ -117,13 +120,13 @@
 </template>
 
 <script setup>
-const dialogVisible = ref(false);
 
 import { ref } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { Search } from '@element-plus/icons-vue';
 import axios from '@/util/axios';
 
+const dialogVisible = ref(false);
 const queryForm = ref({
   query: '',
   pageNum: 1,
@@ -132,6 +135,14 @@ const queryForm = ref({
 
 const total = ref(0);
 const venueList = ref([]);
+
+const form = ref({
+  id: null,
+  venueName: '',
+  imageUrl: '',
+  status: 1,
+  timeSlots: [], // 时间段数组
+});
 
 const getVenueList = async () => {
 const res = await axios.post('/admin/venue/list', queryForm.value);
@@ -152,10 +163,6 @@ const res = await axios.post('/admin/venue/list', queryForm.value);
       imageUrl: 'https://via.placeholder.com/60x60.png?text=A',
       status: 1,
       createTime: '2025-05-30 14:00:00',
-      timeSlots: [
-        { id: 1, startTime: '08:00', endTime: '10:00', capacity: 10, remainingCapacity: 6 },
-        { id: 2, startTime: '10:00', endTime: '12:00', capacity: 10, remainingCapacity: 3 },
-      ],
     },
     {
       id: 2,
@@ -184,13 +191,6 @@ const handleCurrentChange = (page) => {
 
 
 const dialogTitle = ref('新增场地');
-const form = ref({
-  id: null,
-  venueName: '',
-  imageUrl: '',
-  status: 1,
-  timeSlots: [], // 时间段数组
-});
 
 const handleUploadSuccess = (res) => {
   if (res.code === 0) {
