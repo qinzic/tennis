@@ -33,6 +33,24 @@ const routes = [
           import( "../views/site"),
       },
       {
+        path: "/bigType",
+        name: "商品大类管理",
+        component: () =>
+          import( "../views/bigType"),
+      },
+      {
+        path: "/smallType",
+        name: "商品小类管理",
+        component: () =>
+          import( "../views/smallType"),
+      },
+      {
+        path: "/product",
+        name: "商品管理",
+        component: () =>
+          import( "../views/product"),
+      },      
+      {
         path: "/product",
         name: "商品管理",
         component: () =>

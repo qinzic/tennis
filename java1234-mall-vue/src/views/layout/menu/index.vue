@@ -25,6 +25,20 @@
       <el-icon><Filter /></el-icon>
       <span>场地管理</span>
     </el-menu-item>
+      <el-sub-menu index="3">
+      <template #title >
+        <el-icon><ShoppingCart /></el-icon>
+        <span>商品类别管理</span>
+      </template>
+      <el-menu-item index="bigType">
+        <el-icon><management /></el-icon>
+        <span>商品大类管理</span>
+      </el-menu-item>
+      <el-menu-item index="smallType">
+        <el-icon><management /></el-icon>
+        <span>商品小类管理</span>
+      </el-menu-item>
+    </el-sub-menu>
     <el-menu-item index="/product">
       <el-icon><Box /></el-icon>
       <span>商品管理</span>
@@ -49,7 +63,7 @@
 </template>
 
 <script setup>
-import {HomeFilled,User,Management,Tickets,Edit,SwitchButton,Filter,Box} from '@element-plus/icons-vue'
+import {HomeFilled,User,Management,Tickets,Edit,SwitchButton,Filter,Box,ShoppingCart} from '@element-plus/icons-vue'
 
 import {useStore} from 'vuex'
 import { useRoute } from 'vue-router'
