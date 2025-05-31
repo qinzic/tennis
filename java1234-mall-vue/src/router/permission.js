@@ -1,7 +1,7 @@
 import router from "@/router/index";
 
 const whiteList=['/login']
-/*router.beforeEach((to,from,next)=>{
+router.beforeEach((to,from,next)=>{
 
   let token=window.sessionStorage.getItem("token");
   if(token){
@@ -17,4 +17,4 @@ const whiteList=['/login']
       next('/login')
     }
   }
-})*/
+})

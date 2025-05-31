@@ -26,11 +26,17 @@ const routes = [
         component: () =>
           import( "../views/appoint"),
       },
-            {
+      {
         path: "/site",
         name: "场地管理",
         component: () =>
           import( "../views/site"),
+      },
+      {
+        path: "/product",
+        name: "商品管理",
+        component: () =>
+          import( "../views/product"),
       },
       {
         path: "/modifyPassword",

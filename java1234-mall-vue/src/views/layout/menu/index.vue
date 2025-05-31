@@ -25,6 +25,10 @@
       <el-icon><Filter /></el-icon>
       <span>场地管理</span>
     </el-menu-item>
+    <el-menu-item index="/product">
+      <el-icon><Box /></el-icon>
+      <span>商品管理</span>
+    </el-menu-item>
     <el-sub-menu index="11">
       <template #title >
         <el-icon><management /></el-icon>
@@ -45,7 +49,7 @@
 </template>
 
 <script setup>
-import {HomeFilled,User,Management,Tickets,Edit,SwitchButton,Filter} from '@element-plus/icons-vue'
+import {HomeFilled,User,Management,Tickets,Edit,SwitchButton,Filter,Box} from '@element-plus/icons-vue'
 
 import {useStore} from 'vuex'
 import { useRoute } from 'vue-router'
